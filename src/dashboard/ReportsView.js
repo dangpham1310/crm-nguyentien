@@ -7,7 +7,7 @@ const ReportsView = () => {
     completedOrders: 0,
     totalRevenue: 0,
     averageDeliveryTime: 0,
-    topDrivers: [],
+    topCustomers: [],
     ordersByHour: [],
     ordersByStatus: [],
     revenueByMonth: [],
@@ -23,12 +23,12 @@ const ReportsView = () => {
       cancelledOrders: 36,
       totalRevenue: 46800000,
       averageDeliveryTime: 32,
-      topDrivers: [
-        { name: 'Nguyễn Văn An', orders: 128, rating: 4.8, revenue: 8400000 },
-        { name: 'Trần Minh Tú', orders: 115, rating: 4.9, revenue: 7500000 },
-        { name: 'Võ Minh Khang', orders: 103, rating: 4.7, revenue: 6900000 },
-        { name: 'Lê Văn Bình', orders: 98, rating: 4.6, revenue: 6000000 },
-        { name: 'Phạm Thị Hoa', orders: 88, rating: 4.5, revenue: 5400000 }
+      topCustomers: [
+        { name: 'Công ty TNHH ABC', orders: 128, totalSpent: 8400000, loyaltyPoints: 2500 },
+        { name: 'Văn phòng XYZ', orders: 115, totalSpent: 7500000, loyaltyPoints: 2100 },
+        { name: 'Siêu thị MNP', orders: 103, totalSpent: 6900000, loyaltyPoints: 1800 },
+        { name: 'Nhà hàng DEF', orders: 98, totalSpent: 6000000, loyaltyPoints: 1600 },
+        { name: 'Cửa hàng GHI', orders: 88, totalSpent: 5400000, loyaltyPoints: 1400 }
       ],
       ordersByHour: [
         { hour: '6h', orders: 12 },
@@ -432,41 +432,41 @@ const ReportsView = () => {
         </div>
       </div>
 
-      {/* Top Drivers */}
+      {/* Top Customers */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200">
         <div className="px-6 py-4 border-b border-gray-200">
           <h3 className="text-lg font-semibold text-gray-900 flex items-center">
             <svg className="w-5 h-5 mr-2 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
             </svg>
-            Top tài xế xuất sắc
+            Top khách hàng xuất sắc
           </h3>
         </div>
         <div className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            {reportData.topDrivers?.map((driver, index) => (
+            {reportData.topCustomers?.map((customer, index) => (
               <div key={index} className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-4 text-center hover:shadow-lg transition-shadow">
                 <div className="relative mb-3">
                   <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto">
-                    <span className="text-white font-bold text-lg">{driver.name.charAt(0)}</span>
+                    <span className="text-white font-bold text-lg">{customer.name.charAt(0)}</span>
                   </div>
                   <div className="absolute -top-2 -right-2 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
                     <span className="text-yellow-800 font-bold text-sm">#{index + 1}</span>
                   </div>
                 </div>
-                <h4 className="font-semibold text-gray-900 mb-1">{driver.name}</h4>
+                <h4 className="font-semibold text-gray-900 mb-1">{customer.name}</h4>
                 <div className="space-y-1 text-sm">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Đơn hàng:</span>
-                    <span className="font-medium">{driver.orders}</span>
+                    <span className="font-medium">{customer.orders}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Đánh giá:</span>
-                    <span className="font-medium text-yellow-600">⭐ {driver.rating}</span>
+                    <span className="text-gray-600">Tổng chi tiêu:</span>
+                    <span className="font-medium text-green-600">{formatCurrency(customer.totalSpent)}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Doanh thu:</span>
-                    <span className="font-medium text-green-600">{formatCurrency(driver.revenue)}</span>
+                    <span className="text-gray-600">Điểm thưởng:</span>
+                    <span className="font-medium text-blue-600">{customer.loyaltyPoints} điểm</span>
                   </div>
                 </div>
               </div>
